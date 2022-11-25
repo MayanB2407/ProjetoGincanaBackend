@@ -34,7 +34,6 @@ public class StatusController {
 
 	@GetMapping("/listall")
 	public List<StatusModel> findall() {
-		System.out.println("Entrou aqui");
 		return (List<StatusModel>) repository.findAll();
 	}
 
@@ -84,7 +83,8 @@ public class StatusController {
 
 			repository.save(status);
 			return ResponseEntity.ok(status);
-		} else {
+		}
+		else {
 			return ResponseEntity.notFound().build();
 		}
 	}

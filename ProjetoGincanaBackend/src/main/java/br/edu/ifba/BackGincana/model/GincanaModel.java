@@ -36,25 +36,31 @@ public class GincanaModel {
 	private Date data_fim_Gincana;
 
 	@ManyToOne
-	@JoinColumn(name = "id_status")
-	private StatusModel statusModel;
-	
+	@JoinColumn(name = "id_Status")
+	private StatusModel status;
+
 	@OneToMany(mappedBy = "gincana")
 	private Set<GaleriaModel> galerias = new HashSet<GaleriaModel>();
+
+	@OneToMany(mappedBy = "gincana")
+	private Set<UsuarioModel> usuarios = new HashSet<UsuarioModel>();
+
+	@OneToMany(mappedBy = "gincana")
+	private Set<EventoModel> eventos = new HashSet<EventoModel>();
 
 	public GincanaModel() {
 		super();
 	}
 
 	public GincanaModel(Integer id_Gincana, String nome_Gincana, String descricao_Gincana, Date data_inicio_Gincana,
-			Date data_fim_Gincana, StatusModel statusModel, Set<GaleriaModel> galerias) {
+			Date data_fim_Gincana, StatusModel status, Set<GaleriaModel> galerias) {
 		super();
 		this.id_Gincana = id_Gincana;
 		this.nome_Gincana = nome_Gincana;
 		this.descricao_Gincana = descricao_Gincana;
 		this.data_inicio_Gincana = data_inicio_Gincana;
 		this.data_fim_Gincana = data_fim_Gincana;
-		this.statusModel = statusModel;
+		this.status = status;
 		this.galerias = galerias;
 	}
 
@@ -98,21 +104,19 @@ public class GincanaModel {
 		this.data_fim_Gincana = data_fim_Gincana;
 	}
 
-	public StatusModel getStatusModel() {
-		return statusModel;
+	public StatusModel getStatus() {
+		return status;
 	}
 
-	public void setStatusModel(StatusModel statusModel) {
-		this.statusModel = statusModel;
+	public void setStatus(StatusModel status) {
+		this.status = status;
 	}
 
-	public Set<GaleriaModel> getGalerias() {
-		return galerias;
+	@Override
+	public String toString() {
+		return "GincanaModel [id_Gincana=" + id_Gincana + ", nome_Gincana=" + nome_Gincana + ", descricao_Gincana="
+				+ descricao_Gincana + ", data_inicio_Gincana=" + data_inicio_Gincana + ", data_fim_Gincana="
+				+ data_fim_Gincana + ", status=" + status + ", galerias=" + galerias + "]";
 	}
 
-	public void setGalerias(Set<GaleriaModel> galerias) {
-		this.galerias = galerias;
-	}
-
-	
 }

@@ -7,44 +7,63 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name = "tb_status")
 public class StatusModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_status", nullable = false)
-	private Integer id_status;
+	@Column(name = "id_Status", nullable = false)
+	private Integer id_Status;
 
 	@Column(name = "situacao_Status", length = 12, nullable = false)
 	private String situacao_Status;
-
 	
+	@OneToMany(mappedBy="status")
+	private Set<GincanaModel> tarefas = new HashSet<GincanaModel>();
 
-	public StatusModel(Integer id_status, String situacao_Status) {
-		super();
-		this.id_status = id_status;
-		this.situacao_Status = situacao_Status;
-	}
-
+	@OneToMany(mappedBy = "status")
+	private Set<EventoModel> eventos = new HashSet<EventoModel>();
+	
+	
 	public StatusModel() {
 		super();
 	}
 
-	public Integer getId_status() {
-		return id_status;
+
+	public StatusModel(Integer id_Status, String situacao_Status) {
+		super();
+		this.id_Status = id_Status;
+		this.situacao_Status = situacao_Status;
 	}
 
-	public void setId_status(Integer id_status) {
-		this.id_status = id_status;
+
+	public Integer getId_Status() {
+		return id_Status;
 	}
+
+
+	public void setId_status(Integer id_Status) {
+		this.id_Status = id_Status;
+	}
+
 
 	public String getSituacao_Status() {
 		return situacao_Status;
 	}
 
+
 	public void setSituacao_Status(String situacao_Status) {
 		this.situacao_Status = situacao_Status;
 	}
+
+
+	@Override
+	public String toString() {
+		return "StatusModel [id_status=" + id_Status + ", situacao_Status=" + situacao_Status + "]";
+	}
+
+	
 
 }

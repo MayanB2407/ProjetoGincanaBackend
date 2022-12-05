@@ -1,10 +1,14 @@
 package br.edu.ifba.BackGincana.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -13,31 +17,31 @@ public class PerfilModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_perfil", nullable = false)
-	private Integer id_perfil;
+	@Column(name = "id_Perfil", nullable = false)
+	private Integer id_Perfil;
 
 	@Column(name = "cargo_Perfil", length = 15, nullable = false)
 	private String cargo_Perfil;
 
-	
-	
+	@OneToMany(mappedBy = "perfil")
+	private Set<UsuarioModel> usuarios = new HashSet<UsuarioModel>();
+
 	public PerfilModel() {
 		super();
 	}
 
-	
-	public PerfilModel(Integer id_perfil, String cargo_Perfil) {
+	public PerfilModel(Integer id_Perfil, String cargo_Perfil) {
 		super();
-		this.id_perfil = id_perfil;
+		this.id_Perfil = id_Perfil;
 		this.cargo_Perfil = cargo_Perfil;
 	}
 
-	public Integer getId_perfil() {
-		return id_perfil;
+	public Integer getId_Perfil() {
+		return id_Perfil;
 	}
 
-	public void setId_perfil(Integer id_perfil) {
-		this.id_perfil = id_perfil;
+	public void setId_Perfil(Integer id_Perfil) {
+		this.id_Perfil = id_Perfil;
 	}
 
 	public String getCargo_Perfil() {
@@ -47,5 +51,13 @@ public class PerfilModel {
 	public void setCargo_Perfil(String cargo_Perfil) {
 		this.cargo_Perfil = cargo_Perfil;
 	}
+
+	@Override
+	public String toString() {
+		return "PerfilModel [id_Perfil=" + id_Perfil + ", cargo_Perfil=" + cargo_Perfil + ", usuarios=" + usuarios
+				+ "]";
+	}
+	
+	
 
 }

@@ -81,9 +81,8 @@ public class GincanaController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<GincanaModel> update(@PathVariable("id") Integer id, @RequestBody GincanaModel gincanaModel) {
 		var p = repository.findById(id);
-		System.out.println("000000000000000000000000------------------------->" + gincanaModel);
 		
-		var id_Status = gincanaModel.getStatus().getId_Status();
+		
 		if (p.isPresent()) {
 			var gincana = p.get();
 			if (gincanaModel.getNome_Gincana() != null)
@@ -97,8 +96,6 @@ public class GincanaController {
 			if (gincanaModel.getStatus() != null)
 				gincana.setStatus(gincanaModel.getStatus());
 			
-			System.out.println("model -----------------------------"+ gincana);
-
 			repository.save(gincana);
 			return ResponseEntity.ok(gincana);
 		} else {
